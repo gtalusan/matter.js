@@ -30,6 +30,7 @@ import {
     UdpSocketType,
 } from "@matter/general";
 import * as dgram from "node:dgram";
+import { attachBpfMatterFilter } from "./BpfMatterFilter.js";
 import { NodeJsNetwork } from "./NodeJsNetwork.js";
 
 const logger = Logger.get("NodejsChannel");
@@ -132,6 +133,10 @@ export class NodeJsUdpChannel implements UdpChannel {
         }
 
         socket.setBroadcast(true);
+
+        if (listeningPort === 5353) {
+            attachBpfMatterFilter(socket);
+        }
         let netInterfaceZone: string | undefined;
         if (netInterface === undefined && listeningAddress !== undefined) {
             netInterfaceZone = NodeJsNetwork.getNetInterfaceForIp(listeningAddress) || undefined;

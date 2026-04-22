@@ -41,7 +41,8 @@
         "@matter/general": "*",
         "@matter/node": "*",
         "@matter/protocol": "*",
-        "@matter/types": "*"
+        "@matter/types": "*",
+        "koffi": "^2.16.1"
     },
     "devDependencies": {
         "@matter/model": "*",
